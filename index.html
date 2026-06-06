@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Frequency Analyzer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="app-header">
+        <h1>Word Frequency Analyzer</h1>
+        <label class="toggle" title="Alternar modo escuro">
+          <input type="checkbox" id="dark-mode-toggle" />
+          <span>Modo escuro</span>
+        </label>
+      </div>
+
+      <section class="input-section">
+        <div class="input-options">
+          <label for="text-input">Insira o texto para análise:</label>
+          <label class="toggle">
+            <input type="checkbox" id="stop-words-toggle" />
+            <span>Ignorar stop words</span>
+          </label>
+        </div>
+        <textarea
+          id="text-input"
+          maxlength="2048"
+          placeholder="Cole ou digite seu texto aqui..."
+          rows="8"
+        ></textarea>
+        <p class="char-count"><span id="char-count">0</span> / 2048 caracteres</p>
+        <div class="button-group">
+          <button id="analyze-btn" type="button">Translate</button>
+          <button id="clear-btn" type="button" class="btn-secondary">Limpar</button>
+        </div>
+        <p id="error-message" class="error" hidden></p>
+      </section>
+
+      <section id="summary" hidden>
+        <div class="summary-card">
+          <span class="summary-label">Total de palavras</span>
+          <span class="summary-value" id="summary-total">0</span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Palavras únicas</span>
+          <span class="summary-value" id="summary-unique">0</span>
+        </div>
+        <div class="summary-card">
+          <span class="summary-label">Mais frequente</span>
+          <span class="summary-value summary-value--word" id="summary-top">—</span>
+        </div>
+      </section>
+
+      <section class="results-section" hidden>
+        <div class="results-header">
+          <h2>Resultado</h2>
+          <div class="results-actions">
+            <input type="text" id="search-input" placeholder="Filtrar palavras..." aria-label="Filtrar palavras na tabela" />
+            <button id="export-btn" type="button" class="btn-secondary">Exportar CSV</button>
+          </div>
+        </div>
+        <table id="frequency-table">
+          <caption>Frequência de palavras — clique em uma linha para destacar no texto</caption>
+          <thead>
+            <tr>
+              <th scope="col">Palavra</th>
+              <th scope="col">Frequência</th>
+              <th scope="col">%</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+
+        <div class="chart-container">
+          <h3>Top 10 palavras</h3>
+          <canvas id="frequency-chart"></canvas>
+        </div>
+      </section>
+
+      <section id="history-section" hidden>
+        <h2>Histórico de análises</h2>
+        <ul id="history-list"></ul>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="wordFrequency.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
